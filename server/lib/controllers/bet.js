@@ -72,9 +72,10 @@ exports.setstatus = function(req, res) {
   var timer = req.body.timer;
   var winner = req.body.winner;
 
-  if (status == 1) {
-    //create new game
-    Bet.findOne({'identifier': 1}, function (err, bet) {
+  Bet.findOne({'identifier': 1}, function (err, bet) {
+
+    if (status == 1) {
+      //create new game
 
       if (bet === null) {
         var bet = new Bet({
@@ -113,12 +114,22 @@ exports.setstatus = function(req, res) {
         });
       }, timer*1000);
       
-    });
 
-  } else if(status == 3){
+    } else if(status == 2) {
+
+      //Stop betting without timer
+
+      var g = bet.games.length-1;
+      var game = bet.games[g];
+      bet.games[g].status = 2;
+      bet.save(function(err) {
+        if (err) return res.json(500, err);
+        socketIO.sockets.emit('betStatus', 2);
+        res.json(bet);
+      });
+    } else if(status == 3) {
 
     //Stopped betting
-    Bet.findOne({'identifier': 1}, function (err, bet) {
       var g = bet.games.length-1;
       var game = bet.games[g];
       bet.games[g].status = 3;
@@ -134,7 +145,7 @@ exports.setstatus = function(req, res) {
 
 
           User.findOne({
-            '_id': elem.user
+            '_id': elem.userid
           }, function (err, user) {
             if (err) return res.json(500, err);
             if (user) {
@@ -176,8 +187,9 @@ exports.setstatus = function(req, res) {
           res.json(bet);
         }
       );
-    });
-  }
+    }
+
+  });
 };
 
 // Remove a bet

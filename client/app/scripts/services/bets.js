@@ -32,6 +32,7 @@ angular.module('lightApp.BetService', [])
     });
 
     socket.on('coinUpdate', function (coins) {
+      console.log(coins);
       $rootScope.currentUser.public.coins = coins;
     });
 
@@ -90,6 +91,36 @@ angular.module('lightApp.BetService', [])
           }
         }
         return false;
+      }
+    };
+
+    factory.getBetInfo = function() {
+      var id = $rootScope.currentUser._id;
+      var game = factory.currentGame();
+      if (game !== undefined) {
+        var bets = game.bets;
+        for (var i = bets.length - 1; i >= 0; i--) {
+          if (bets[i].userid === id) {
+
+            if (parseInt(bets[i].choice) === 0) {
+              return {
+                yourbet: bets[i].amount,
+                yourteam: bets[i].choice,
+                percentage: bets[i].amount / factory.currentGame().team[0].coins,
+                of: factory.currentGame().team[1].coins,
+              };
+            }else{
+              return {
+                yourbet: bets[i].amount,
+                yourteam: bets[i].choice,
+                percentage: bets[i].amount / factory.currentGame().team[1].coins,
+                of: factory.currentGame().team[0].coins,
+              };
+            }
+
+          }
+        }
+        return 'sup';
       }
     };
 

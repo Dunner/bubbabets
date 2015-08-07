@@ -112,42 +112,26 @@ p, b, h1, h2, h3, h4, h5, h6, span
 
 
 
-// Sidefeed
+//bets
+.red.ng-animate 
+  transition left cubic-bezier(0.250, 0.460, 0.450, 0.940) .5s
+.red.ng-leave.ng-leave-active
+  left -100% !important
+.red.ng-enter 
+  left -100% !important
 
-.animate-switch.ng-animate
-  transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) .5s
-  position absolute
-  right 0
+.red.ng-leave,
+.red.ng-enter.ng-enter-active 
+  left 0px !important
 
-.animate-switch.ng-leave.ng-leave-active
+
+//bets
+.blue.ng-animate 
+  transition right cubic-bezier(0.250, 0.460, 0.450, 0.940) .5s
+.blue.ng-leave.ng-leave-active
   right -100% !important
-  z-index 10
-  & .dnr-flow-content-scroll
-    overflow hidden !important
-    
-.animate-switch.ng-enter
-  right: 100% !important
-  z-index 11
-
-.animate-switch.ng-leave,
-.animate-switch.ng-enter.ng-enter-active
+.blue.ng-enter 
+  right -100% !important
+.blue.ng-leave,
+.blue.ng-enter.ng-enter-active 
   right 0px !important
-  z-index 11
-  & .dnr-flow-content-scroll
-    overflow hidden !important
-
-
-
-.animate-switch-header.ng-animate 
-  transition: right cubic-bezier(0.250, 0.460, 0.450, 0.940) .5s
-
-
-.animate-switch-header.ng-leave.ng-leave-active
-  right -100% !important
-
-.animate-switch-header.ng-enter 
-  right 100% !important
-
-.animate-switch-header.ng-leave,
-.animate-switch-header.ng-enter.ng-enter-active 
-  right: 0px !important

@@ -49,6 +49,7 @@ angular.module('lightApp')
 
     var tick = function() {
       var clock = Date.now();
+      $scope.betInfo = BetService.getBetInfo();
       $scope.timer = Math.round( (BetService.getTimer() - clock) / 1000 );
       if ($scope.timer < 0) {
         $scope.timer = 0;

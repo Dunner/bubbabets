@@ -1,7 +1,39 @@
-.bet_choice
-	width auto
-	height 50px
-	line-height 50px
-	background blue
-.bet_choice_selected
-	background green!important
+  
+
+.bet
+  width 100%
+  padding 2px 8px
+  .inside
+    width 100%
+    border-radius 3px
+    border 2px solid rgba(0,0,0,.1)
+    padding 5px
+  &.red
+    padding-right 15px
+    .inside
+      background rgba(232,115,82,1)
+  &.blue 
+    padding-left 15px
+    .inside
+      background rgba(68,190,192,1)
+
+.betting-window
+  padding 15px
+  border-top 1px solid #222
+  color #fefefe
+  position absolute
+  left 0px
+  right 0px
+  bottom 0px
+
+.timer
+  left 0px
+  right 0px
+  height 60px
+  background #222
+  color #fefefe
+  position absolute
+  z-index 99
+  bottom 100%
+  & h4
+    color red
