@@ -1,0 +1,32 @@
+
+
+<div class="mast-container">
+  <div class="mast-userarea">
+    user: {{$root.currentUser.public.name}}
+    {{$root.currentUser.public.coins}}$
+    <p class="cursor" ng-click="$root.logout()">Logout</p>
+  </div>
+  <div class="mast-navigation">
+    <ul>
+      <li>
+        <a ui-sref="social.betting">Betting</a>
+      </li>
+      <li>
+        <a ui-sref="social.topics">topics</a>
+      </li>
+      <li>
+        <a ui-sref="social.users">Users</a>
+      </li>
+      <li>
+        <a ui-sref="social.settings">Settings</a>
+      </li>
+    </ul>
+  </div>
+  <div class="mast-tracker">
+  </div>
+</div>
+
+<div class="main-container">
+  <div class="bets-view" bets-feed></div>
+  <div class="social-view" ui-view=""></div>
+</div>

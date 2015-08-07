@@ -1,0 +1,21 @@
+
+
+<ul class="double" style="margin-top:40px">
+  <li>
+    <div class="bg-dCont pad20 f-black">
+      <div class="bg-cCont f-black" style="height:40px">
+        <h5 style="line-height: 40px; text-align: center">Users</h5>
+      </div>
+
+      <div class="bg-cCont f-black" style="height:40px" ng-repeat="user in users" >
+        <h5 style="line-height: 40px; text-align: center"><a ui-sref="social.user({'id': user.id})">{{user.public.name}}</a></h5>
+      </div>
+
+    </div>
+  </li>
+  <li>
+    <div class="bg-dCont pad20 f-black">
+    </div>
+  </li>
+</ul>
+

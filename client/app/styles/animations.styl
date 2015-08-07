@@ -1,0 +1,153 @@
+@keyframes pulsate {
+    0%, 100% {
+        width: 20%;
+    }
+    50% {
+        width: 5%;
+    }
+}
+
+
+
+// Hide style
+.dnr-progress.ng-hide
+  opacity 0!important
+  display block!important
+  top 100%!important
+.dnr-menu.ng-cloak
+  display none!important
+.dnr-menu.ng-hide
+  width 0px!important
+  display block!important
+.titlenav.ng-hide
+  right calc( 100% - 70px )!important
+  display block!important
+.dropdown-inside.ng-hide
+  width 0px!important
+  height 50px!important
+.dnr-social-scroll.ng-hide
+  display block!important
+  & .social-view
+    top 100%!important
+    display block!important
+.social-banners.ng-hide
+  opacity 0!important
+  display block!important
+.dnr-social-mask.ng-hide
+  opacity 0!important
+  display block!important
+
+.gototop svg.rotate
+  transform rotate(0deg)!important
+
+// Animate style
+.dnr-social-mask
+  transition opacity 0.3s ease
+.dnr-social-scroll
+  transition top 0.3s ease
+.social-view
+  transition top 0.3s ease
+.dropdown-inside
+  transition width 0.1s ease, height 0.1s 0.1s ease
+  
+.dnr-menu, .dnr-slate, .dnr-social-nav-links li:before, .dnr-menu, .titlenav
+  transition width 0.3s ease
+
+.social-banners
+  transition opacity 0.3s ease
+
+.titlenav
+  transition right 0.3s ease
+
+.gototop svg
+  transition transform 0.3s ease
+
+.svg-icon path
+  transition fill 0.3s ease-in-out
+
+p, b, h1, h2, h3, h4, h5, h6, span
+  transition font-size 0.3s ease-in-out
+
+
+.scroll-indicator
+  transition top .2s linear
+.dnr-flow-vlelem
+  transition border-left-width .2s linear,
+             background .2s ease
+.dragbar svg
+  transition background .2s ease
+
+
+.animate-repeat.ng-move,
+.animate-repeat.ng-enter,
+.animate-repeat.ng-leave
+  transition all 0.5s ease-in-out
+.animate-repeat.ng-leave.ng-leave-active,
+.animate-repeat.ng-move,
+.animate-repeat.ng-enter
+  opacity 0
+  max-height 0
+.animate-repeat.ng-leave,
+.animate-repeat.ng-move.ng-move-active,
+.animate-repeat.ng-enter.ng-enter-active
+  opacity 1
+  max-height 10%
+
+
+[ui-view].ng-enter, [ui-view].ng-leave
+    transition all .5s ease-in-out
+
+[ui-view].ng-enter
+  overflow hidden
+  opacity 0
+
+[ui-view].ng-enter-active
+  opacity 1
+
+[ui-view].ng-leave
+  opacity 1
+
+[ui-view].ng-leave-active
+  opacity 0
+
+
+
+// Sidefeed
+
+.animate-switch.ng-animate
+  transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) .5s
+  position absolute
+  right 0
+
+.animate-switch.ng-leave.ng-leave-active
+  right -100% !important
+  z-index 10
+  & .dnr-flow-content-scroll
+    overflow hidden !important
+    
+.animate-switch.ng-enter
+  right: 100% !important
+  z-index 11
+
+.animate-switch.ng-leave,
+.animate-switch.ng-enter.ng-enter-active
+  right 0px !important
+  z-index 11
+  & .dnr-flow-content-scroll
+    overflow hidden !important
+
+
+
+.animate-switch-header.ng-animate 
+  transition: right cubic-bezier(0.250, 0.460, 0.450, 0.940) .5s
+
+
+.animate-switch-header.ng-leave.ng-leave-active
+  right -100% !important
+
+.animate-switch-header.ng-enter 
+  right 100% !important
+
+.animate-switch-header.ng-leave,
+.animate-switch-header.ng-enter.ng-enter-active 
+  right: 0px !important

@@ -1,0 +1,35 @@
+
+<div class="topic-masthead">
+  <div class="image"></div>
+  <div class="title">
+    <h2>{{topic.title}}</h2>
+    <h5>{{topic.user.name}}</h5>
+  </div>
+</div>
+
+
+<div class="topic-content">
+  <div ng-bind-html="topic.content"></div>
+</div>
+
+<div class="topic-comment">
+
+  <form class="post-form" ng-submit="addComment(comment)">
+    <textarea id="new-content" name="content" ng-model="comment" autofocus="" placeholder="Write a comment.."></textarea>
+    <div><button type="submit" class="dnr-button button button-ok">Post</button></div>
+    <div style="clear:both"></div>
+  </form>
+
+</div>
+
+<ul class="topic-comments">
+  <li ng-repeat="comment in topic.comments">
+    <div class="image">
+      <h6 class="text-right">#{{$index}}</h6>
+    </div>
+    <div class="title">
+      <h6>{{topic.user.name}}</h6>
+      <p>{{comment.comment}}</p>
+    </div>
+  </li>
+</ul>

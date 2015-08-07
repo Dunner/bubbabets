@@ -1,0 +1,7 @@
+
+<div ng-repeat="bet in betservice.currentGame().bets">
+	<p>
+	<a ui-sref="social.user({'id': bet.userid})">{{bet.username}}</a> placed
+	{{bet.amount}}$ on {{betservice.currentGame().team[bet.choice].name}}</p>
+	<hr/>
+</div>

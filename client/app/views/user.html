@@ -1,0 +1,19 @@
+
+
+<ul class="double">
+  <li>
+    <div class="bg-dCont pad20 f-black">
+      <div class="bg-cCont f-black" style="height:40px">
+        <h5 style="line-height: 40px; text-align: center">User</h5>
+      </div>
+      {{user.name}}
+      <button ng-click="addFriend()" ng-show="!isBuddy(userId)">Add friend</button>
+      <button ng-click="MessageService.openChat(userId, user.name)">Message</button>
+      Coins: {{user.coins}}
+    </div>
+  </li>
+  <li>
+    <div class="bg-dCont pad20 f-black">
+    </div>
+  </li>
+</ul>

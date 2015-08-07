@@ -1,0 +1,90 @@
+.topic-masthead
+	height 120px
+	width 100%
+	line-height 120px
+	padding 15px
+	color #999
+	background #f1f1f1
+	border-bottom 1px solid gray
+	& .image
+		position relative
+		border 2px solid #999
+		height 90px
+		width 90px
+		float left
+	& .title
+		position relative
+		line-height 30px
+		width calc( 100% - 90px )
+		padding 15px
+		float left
+		
+	&:after
+		content ''
+		display block
+		clear both
+		
+.topic-content
+	width 100%
+	min-height 200px
+	padding 15px
+	padding-left 20px
+	overflow hidden
+	background #f1f1f1
+	
+.topic-comment
+	width 100%
+	min-height 200px
+	background #F1F1F1
+	
+	& form
+		position relative
+		padding 5px
+	
+		& textarea 
+			border 0px solid #ccc
+			border-radius 0px
+			padding 10px
+			min-height 150px
+			width 100%
+			background #fff
+			font-family 'Open Sans',sans-serif
+			font-size 95%
+			color #555
+			border-top-left-radius 0
+			border-top-right-radius 0
+			box-shadow none
+			outline none
+		& div
+			text-align right
+			
+			& button
+				margin-top 3px
+				display inline-block
+
+ul.topic-comments
+	width 100%
+	min-height 200px
+	& li
+		& .image
+			position relative
+			height 90px
+			width 90px
+			float left
+			padding-top 15px
+		& .title
+			position relative
+			line-height 30px
+			width calc( 100% - 90px )
+			padding 15px
+			float left
+			
+		&:after
+			content ''
+			display block
+			clear both
+	& li:nth-child(even)
+		background #F1F1F1
+	& li:nth-child(odd)
+		background rgba(255,255,255,.8)
+	

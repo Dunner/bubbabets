@@ -1,0 +1,414 @@
+
+
+/* -----
+Colors
+----- */
+
+$cTeal = rgba(68,190,192,1)
+$cYellow = rgba(235,201,94,1)
+$cRorange = rgba(232,115,82,1)
+$cRed = rgba(240, 94, 94,1)
+$cLblue = rgba( 173,176,208,1)
+$cLime = rgba(74, 212, 134,1)
+
+$bgDark = #3e3e3e
+$bgLight = #3c3c3c
+$bgPrime = #2c2a29
+$bgSec = #2e2b29
+$bg = #e5e5e5
+$white = #fff
+$chromeWhite = #f2f2f2
+$chromeMellow = #f5f5f5
+$chromeGray = #c9c9c9
+
+color-light = #404f69
+color-medium = #364359
+color-dark = #2c3749
+
+color-background = #2e2e2e
+color-light = #fff
+color-medium = #303838
+color-dark = #324040
+
+color-highlight = rgba(255,255,255,0.2)
+color-shadow = rgba(0,0,0,0.2)
+color-shadow-double = rgba(0,0,0,0.3)
+
+$accent = #3A3C49
+color-deccent-light = #404f69
+color-deccent-medium = #3A3C49
+color-deccent-dark = #2A2C39
+
+
+  /* -----
+  Font-colors
+  ----- */
+
+  .logo
+    line-height 80px
+    text-align center
+    text-shadow -1px 0 rgba(255,255,255,0.3), 0 1px rgba(255,255,255,0.3), 1px 0 rgba(255,255,255,0.3), 0 -1px rgba(255,255,255,0.3)
+
+  .f-white
+    color #f5f5f6
+  .f-black
+    color #000
+  .f-orange
+    color $cRorange
+  .f-yellow
+    color $cYellow
+  .f-lime
+    color $cLime
+  .f-teal
+    color $cTeal
+  .f-red
+    color red
+  /* -----
+  Backgrounds
+  ----- */
+  .bg-dCont
+    background #f3f3f3
+  .bg-cCont
+    background #f6f6f6
+  .bg-orange
+    background $cRorange
+  .bg-yellow
+    background $cYellow
+  .bg-lime
+    background $cLime
+  .bg-teal
+    background $cTeal
+
+
+/* -----
+Misc
+----- */
+
+.cursor
+  cursor pointer
+.link
+  text-decoration underline
+.pad20
+  padding 20px
+.scroll-indicator
+  position absolute
+  left  2px
+  width  8px
+  height 20px
+  background  #333
+
+/* -----
+Sizes
+----- */
+
+.full
+  width 100%
+  height 100%
+  position relative
+  overflow hidden
+
+height-reception = 100px
+height-topbar = 30px
+height-navbar = 70px
+
+
+/* -----
+Positioning
+----- */
+
+.fleft
+  float left
+
+.fright
+  float right
+
+.fcenter
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+
+.text-center
+  text-align center
+.text-left
+  text-align left
+.text-right
+  text-align right
+
+/* -----
+Buttons
+----- */
+
+.dnr-button
+  background $cLblue
+  border 0
+  line-height 40px
+  padding 0px 40px
+  border-radius 20px
+  cursor pointer
+  transition all 0.3s ease
+  overflow hidden
+  outline none
+  color white
+  margin 0 auto
+  position relative
+  font-family 'Montserrat', sans-serif
+  font-weight 700
+  &:after
+    content ''
+    position absolute
+    width 200px
+    left -200px
+    top 0px
+    transform skewX(-20deg)
+    background-image linear-gradient(to right,transparent,rgba(#fff,0.4),transparent)
+    height 50px
+  &:hover:after
+    animation shine .5s ease
+
+@keyframes shine
+  100%
+    left 200px
+
+
+.button,
+.button:hover,
+.button:active,
+.button:visited 
+    position relative
+    text-decoration none
+    border none
+    line-height 1.5
+    font-size 100%
+    display inline-block
+    cursor pointer
+    
+.button-ok,
+.button-ok:hover,
+.button-ok:focus 
+    background-color #5CB811
+
+.button-cancel,
+.button-cancel:hover,
+.button-cancel:focus 
+    background-color #FE1A00
+
+.button 
+    border-radius 4px
+    color black
+    padding 0 3px
+    font-weight bold
+    text-align center
+
+.btn-group 
+  position relative
+  display inline-block
+  *display inline
+  *margin-left .3em
+  font-size 0
+  white-space nowrap
+  vertical-align middle
+  *zoom 1
+  
+  
+.btn
+  outline 0
+  box-shadow none
+  display inline-block !important
+  padding 6px 12px
+  margin-bottom 0
+  font-size 14px
+  font-weight normal
+  line-height 1.42857143
+  text-align center
+  white-space nowrap
+  vertical-align middle
+  touch-action manipulation
+  cursor pointer
+  user-select none
+  background-image none
+  border 0
+  border-radius 0px
+
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn.active.focus 
+  border 1px solid blue
+
+.btn:hover,
+.btn:focus,
+.btn.focus 
+  color #333
+  text-decoration none
+
+.btn:active,
+.btn.active 
+  background-image none
+  outline 0
+
+.btn.disabled,
+.btn[disabled],
+fieldset[disabled] .btn 
+  pointer-events none
+  cursor not-allowed
+  filter unquote('progid:DXImageTransform.Microsoft.Alpha(Opacity=65)')
+  box-shadow none
+  opacity .65
+
+.btn-default 
+  color #333
+  background-color #fff
+
+.btn-default:hover,
+.btn-default:focus,
+.btn-default.focus,
+.btn-default:active,
+.btn-default.active,
+.open > .dropdown-toggle.btn-default 
+  color #333
+  background-color #e6e6e6
+
+.btn-default:active,
+.btn-default.active,
+.open > .dropdown-toggle.btn-default 
+  background-image none
+
+.btn-default.disabled,
+.btn-default[disabled],
+fieldset[disabled] .btn-default,
+.btn-default.disabled:hover,
+.btn-default[disabled]:hover,
+fieldset[disabled] .btn-default:hover,
+.btn-default.disabled:focus,
+.btn-default[disabled]:focus,
+fieldset[disabled] .btn-default:focus,
+.btn-default.disabled.focus,
+.btn-default[disabled].focus,
+fieldset[disabled] .btn-default.focus,
+.btn-default.disabled:active,
+.btn-default[disabled]:active,
+fieldset[disabled] .btn-default:active,
+.btn-default.disabled.active,
+.btn-default[disabled].active,
+fieldset[disabled] .btn-default.active 
+  background-color #fff
+
+.btn-default .badge 
+  color #fff
+  background-color #333
+
+
+/* -----
+Columns
+----- */
+
+ul.double
+  width 100%
+  position relative
+  margin-bottom 15px
+  padding 0
+  & li
+    width calc(50% - 10px)
+    float left
+    position relative
+    margin-left 20px
+    overflow hidden
+    &:first-child
+      margin-left 0px
+  &:after
+    content ''
+    display block
+    clear both
+
+ul.tripple
+  width 100%
+  position relative
+  margin-bottom 15px
+  padding 0
+  & li
+    width calc(33.333% - 20px)
+    float left
+    position relative
+    margin-left 20px
+    overflow hidden
+    &:first-child
+      width 33.333%
+      margin-left 0px
+  &:after
+    content ''
+    display block
+    clear both
+
+
+/* -----
+SVG Icons - svgicons.sparkk.fr
+----- */
+
+.svg-icon
+  width 1em
+  height 1em
+
+
+.svg-icon path,
+.svg-icon polygon,
+.svg-icon rect
+  fill #4691f6
+
+
+.svg-icon circle
+  stroke #4691f6
+  stroke-width 1
+
+
+.dropdown
+  position absolute
+  top 0
+  bottom 0
+  right 20px
+  width 50px
+  & .dropdown-toggle
+    line-height 50px
+    width 100%
+    height 100%
+    color white
+    &.active
+      background #3B3F44
+      
+  & ul.dropdown-inside
+    position absolute
+    top 0px
+    right 100%
+    overflow hidden
+    line-height 40px
+    color white
+    background #3B3F44
+    width 200px
+    border-top-right-radius 0px
+    z-index 15
+    & li
+      width 100%
+      height 50px
+      line-height 50px
+      overflow hidden
+      position relative
+      border-bottom 1px solid #888
+      &:not(:first-child) 
+        border-right 1px solid #888
+      & .icon
+        position absolute
+        top 0
+        bottom 0
+        left 0
+        width 50px
+        border-right 1px solid #888
+      & .text
+        position absolute
+        top 0
+        bottom 0
+        left 50px
+        overflow hidden
+        width calc(100% - 50px)
+        

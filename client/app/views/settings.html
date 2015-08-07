@@ -1,0 +1,49 @@
+
+
+
+
+
+<ul class="double">
+  <li>
+    <div class="bg-dCont pad20">
+      <div class="bg-cCont" style="height:40px">
+        <h5 style="line-height: 40px; text-align: center">Settings</h5>
+      </div>
+
+
+
+        <form class="form" name="form" ng-submit="changeUsername(form)" novalidate>
+
+        <ul class="double">
+          <li>
+            <h5>Name</h5>
+          </li>
+          <li>
+            <input type="text" name="name" ng-model="cUser.public.name"
+                   placeholder="Username"
+                   required/>
+            <p class="help-block" ng-show="form.name.$error.required && submitted">
+              A name is required
+            </p>
+            <p class="help-block" ng-show="form.name.$error.name && submitted">
+              Doesn't look like a valid name.
+            </p>
+            <p class="help-block" ng-show="form.name.$error.required && submitted">
+              What's your name?
+            </p>
+            <p class="help-block" ng-show="form.name.$error.mongoose">
+              {{ errors.name }}
+            </p>
+          </li>
+
+          <button class="dnr-button" type="submit">Change name</button>
+
+        </form>
+
+
+    </div>
+  </li>
+  <li>
+  </li>
+</ul>
+

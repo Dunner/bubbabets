@@ -1,0 +1,36 @@
+
+Topics
+<hr>
+
+<div class="dnr-flow-vlelem" ng-repeat="item in messages.slice().reverse() | orderBy:'createdAt'" style="height:auto; padding: 0 5px 5px 60px; min-height: 50px">
+	<div class="avatar"></div>
+	<a ui-sref="social.topic({'slug': item.titleslug})">
+	  <h6 style="line-height:25px; margin-bottom:0px!important; text-align: left;">
+	    <span>{{item.user.name}} {{item.createdAt | date:"'@' h:mm a"}}:</span><br/>
+	    {{item.title}}
+	  </h6>
+	</a>
+</div>
+
+<hr>
+Create new
+<hr>
+
+<div class="post-new">
+
+  <form class="post-form" ng-submit="addTopic(topic)">
+
+    <input name="title" id="new-title" type="text" placeholder="Title" ng-model="topic.title" autofocus="" />
+
+    <select ng-model="topic.category">
+      <option ng-repeat="category in categories" value="{{category}}">{{category}}</option>
+    </select>
+
+    <div text-angular class="input-content" id="new-content" name="content" ng-model="topic.content" autofocus="" ></div>
+
+    <button type="submit" class="dnr-button button button-ok">Post</button>
+
+    <div style="clear:both"></div>
+  </form>
+  
+</div>
