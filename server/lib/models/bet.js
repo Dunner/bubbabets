@@ -27,6 +27,7 @@ var BetSchema = new Schema({
 		    {
 		      userid: String,
 		      username: String,
+		      userpaperdoll: String,
 		      choice: String,
 		      amount: String,
 		      odds: String,

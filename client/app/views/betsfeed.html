@@ -1,7 +1,14 @@
 
-<div ng-repeat="bet in betservice.currentGame().bets" class="animate-bet bet" ng-class="(bet.choice==0) ? 'red' : 'blue'">
-	<div class="inside">
-		<a ui-sref="social.user({'id': bet.userid})">{{bet.username}}</a> 
-		placed {{bet.amount}}$ on {{betservice.currentGame().team[bet.choice].name}}
+
+<div class="bets">
+	<div ng-repeat="bet in betservice.currentBets()" class="animate-bet bet" ng-class="(bet.choice==0) ? 'red' : 'blue'">
+		<div class="inside">
+			<a ui-sref="social.user({'id': bet.userid})">{{bet.username}}</a> 
+			<p>{{bet.amount}}$ on {{betservice.currentGame().team[bet.choice].name}}</p>
+		    <div class="icon">
+		      <svg width="100%" height-"100%" dnr-avatar paperdoll="bet.userpaperdoll" viewBox="90 150 550 1052"></svg>
+		      {{bet.userpaperdoll}}
+		    </div>
+		</div>
 	</div>
 </div>

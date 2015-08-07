@@ -1,8 +1,5 @@
 
 
-
-
-
 <ul class="double">
   <li>
     <div class="bg-dCont pad20">
@@ -47,3 +44,50 @@
   </li>
 </ul>
 
+
+
+<div class="bg-dCont f-white" dnr-paperdoll style="margin-bottom:15px">
+
+  <ul class="charEdit">
+    <li>
+      <svg width="80%" height-"100%" viewBox="0 0 744 1052" id="paperdoll"></svg>
+      <div class="colors">
+        <button class="testbtn dnr-button" style="position:Absolute; bottom:110%; left: 10%; width:80%; height:50px; line-height:50px" ng-click="changePaperdoll()"><h3>save</h3></button>
+        <ul class="colorSwap">
+          <li ng-repeat="color in colors[palette]"
+              ng-style="{ 'background' : color}"
+              ng-click="changeColor(toEdit, color, inventoryOption)"
+              >
+          </li>
+        </ul>
+        <div id="colorPick" style="position: relative">
+          <div colorpicker type="text" ng-model="specificColor" colorpicker-parent="true"></div>
+        </div>
+      </div>
+    </li>
+    <li>
+      <div class="controls">
+        <nav class="options toprow">
+          <ul>
+            <li ng-repeat="item in optionsTree | toArray | orderBy : 'item.index'" ng-click="changeOption(item.$key);" ng-class="{'active': option === item.$key}"><a>{{item.$key}}</a></li>
+          </ul>
+        </nav>
+        <nav class="options botrow">
+          <ul>
+            <li ng-repeat="item in optionsTree[option].options | toArray | orderBy : 'item.index'" ng-click="changeEdit(item.$key);" ng-class="{'active': edit === item.$key}"><a>{{item.$key}}</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="inventory">
+        <div class="itemWrapper" ng-click="updateDoll(option, edit, inventoryOption[0], '')" ng-show="optionsTree[option].options[edit].removeable">
+          <svg viewBox="0 0 744 1052" id="invEdit"></svg>
+        </div>
+        <div class="itemWrapper" ng-repeat="item in inventory" ng-click="updateDoll(option, edit, inventoryOption[0], item.name)" ng-class="{'active': paperdoll[optionsTree[option].options[edit].select[0]].name === item.name}">
+          <svg dnr-characteritem="{{$index}}" viewBox="0 0 744 1052" id="invEdit"></svg>
+          <h6 class="text-center">{{item.name}}</h6>
+        </div>
+        <button class="testbtn dnr-button" style="position:Absolute; bottom:0%; right: 0%; width:60%; height:50px; line-height:50px" ng-click="randomize()"><h3>Randomize</h3></button>
+      </div>
+    </li>
+  </ul>
+</div>

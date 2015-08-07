@@ -35,6 +35,7 @@ exports.create = function(req, res) {
         var newbet = {
           userid: req.body.userid,
           username: user.public.name,
+          userpaperdoll: user.public.paperdoll,
           choice: req.body.choice,
           amount: req.body.amount
         };
@@ -169,7 +170,7 @@ exports.setstatus = function(req, res) {
               } else {
                 //looser
                 user.public.coins -= elem.amount;
-                if (user.public.coins <= 0) {
+                if (user.public.coins < 100) {
                   user.public.coins = 100;
                 };
                 user.save(function(err) {

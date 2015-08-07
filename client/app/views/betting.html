@@ -4,7 +4,7 @@
 	<div ng-show="betservice.currentGame().status == 1" class="timer">Closing bets in <h4>{{timer}}s</h4></div>
 
 	<ul class="double">
-	  <li>
+	  	<li>
 			<form name="bettingForm" ng-submit="placeBet()" ng-show="betservice.currentGame().status == 1 && betservice.findMyBet() == false">
 				<label>{{betservice.currentGame().team[0].name}}<input type="checkbox" ng-model="betform.choice" ng-true-value="0" ng-false-value="1"></label>
 				<br>
@@ -24,51 +24,51 @@
 
 
 
-				<div ng-show="betservice.findMyBet() !== false">
-					you placed {{betservice.findMyBet().amount}}$ on {{betservice.currentGame().team[betservice.findMyBet().choice].name}}
+			<div ng-show="betservice.findMyBet() !== false">
+				you placed {{betservice.findMyBet().amount}}$ on {{betservice.currentGame().team[betservice.findMyBet().choice].name}}
+			</div>
+
+			<div ng-show="betservice.currentGame().status == 2">
+				<h3>Bets are closed</h3>
+				{{betservice.currentGame().team[0].name}} total: {{betservice.currentGame().team[0].coins}}$
+				<br>
+				{{betservice.currentGame().team[1].name}} total: {{betservice.currentGame().team[1].coins}}$
+				<br>
+				You placed {{betInfo.yourbet}}$ on 
+				{{ betservice.currentGame().team[betInfo.yourteam].name}}, you stand to win
+				{{betInfo.percentage * 100}}% of {{betInfo.of}}$ ( {{betInfo.percentage * betInfo.of}} ) <br>
+				or loose {{(betInfo.yourbet / $root.currentUser.public.coins)*100}}% of your total coins
+			</div>
+
+
+
+			<div ng-show="betservice.currentGame().status == 3">
+				<h1 style="color: blue">{{betservice.currentGame().team[betservice.currentGame().winner].name}} wins!</h1>
+
+				<!-- you win -->
+				<div ng-show="betservice.currentGame().winner == betservice.findMyBet().choice">
+					You win
 				</div>
 
-				<div ng-show="betservice.currentGame().status == 2">
-					<h3>Bets are closed</h3>
-					{{betservice.currentGame().team[0].name}} total: {{betservice.currentGame().team[0].coins}}$
-					<br>
-					{{betservice.currentGame().team[1].name}} total: {{betservice.currentGame().team[1].coins}}$
-					<br>
-					You placed {{betInfo.yourbet}}$ on 
-					{{ betservice.currentGame().team[betInfo.yourteam].name}}, you stand to win
-					{{betInfo.percentage * 100}}% of {{betInfo.of}}$ ( {{betInfo.percentage * betInfo.of}} ) <br>
-					or loose {{(betInfo.yourbet / $root.currentUser.public.coins)*100}}% of your total coins
+				<!-- you loose -->
+				<div ng-show="betservice.currentGame().winner != betservice.findMyBet().choice">
+					You loose
 				</div>
 
+			</div>
 
+	  	</li>
 
-				<div ng-show="betservice.currentGame().status == 3">
-					<h1 style="color: blue">{{betservice.currentGame().team[betservice.currentGame().winner].name}} wins!</h1>
-
-					<!-- you win -->
-					<div ng-show="betservice.currentGame().winner == betservice.findMyBet().choice">
-						You win
-					</div>
-
-					<!-- you loose -->
-					<div ng-show="betservice.currentGame().winner != betservice.findMyBet().choice">
-						You loose
-					</div>
-
-				</div>
-
-	  </li>
-
-	  <li>
+	  	<li>
 			<h4>Admin Options<h4><br>
 			<!-- start new game -->
 			<form ng-submit="startBetting()" ng-show="betservice.currentGame().status == 3" class="form">
-				Team A: <input ng-model="admin.betinfo.teamA">
+				Team A: <input type="text" ng-model="admin.betinfo.teamA">
 				<br>
-				Team B: <input ng-model="admin.betinfo.teamB">
+				Team B: <input type="text" ng-model="admin.betinfo.teamB">
 				<br>
 				Countdown <input type="number" ng-model="admin.betinfo.timer">
-				<button type="submit">Start new game</button>
+				<button class="button" type="submit">Start new game</button>
 			</form>
 
 			<!-- Stop betting -->

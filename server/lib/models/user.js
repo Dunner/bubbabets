@@ -14,7 +14,8 @@ var userSchema = new Schema({
                 id   : String
             }
         ],
-        coins        : Number
+        coins        : Number,
+        paperdoll    : {}
     },
     local            : {
         email        : String,

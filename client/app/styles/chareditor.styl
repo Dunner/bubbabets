@@ -1,0 +1,120 @@
+
+
+ul.charEdit
+  width 100%
+  padding 20px
+  & > li
+    &:first-child
+      background-color #e7e7e7
+      width 40%
+      height auto
+      padding 0px
+    &:last-child
+      padding 20px
+      width 60%
+      height 100%
+      position absolute
+      right 0px
+      bottom 0px
+    & > svg
+      margin-left 10%
+
+.colors
+  ul.colorSwap
+    float left
+    width calc(100% - 115px)
+    & > li
+      cursor pointer
+      height 60px
+      width 14.285%
+      float left
+    &:after
+      content ''
+      display block
+      clear both
+  #colorPick
+    width 115px
+    height 120px
+    float left
+    & > .colorpicker
+      position relative !important
+      top 0px
+      height 120px
+      left 0px
+      display block!important
+      z-index 15!important
+      & .close-colorpicker
+        display none
+      & .dropdown-menu
+        position relative !important
+        overflow hidden
+        padding 0px
+        width 100%
+        height 100%
+        min-width 115px
+        &:before
+          display none
+      & colorpicker-preview
+        display block
+        position absolute
+        bottom 0px
+        left 0px
+        height 20px
+        width 100%
+      & *
+        padding 0px
+        margin 0px
+  &:after
+    content ''
+    display block
+    clear both
+
+.inventory
+  background #e7e7e7
+  width 100%
+  height calc(100% - 100px)
+  & > .itemWrapper
+    width 20%
+    float left
+    overflow hidden
+    cursor pointer
+    color black
+    &.active
+      border 3px solid red
+  &:after
+    content ''
+    display block
+    clear both
+
+nav.options
+  width 100%
+  display table
+  height 50px
+  table-layout fixed
+  & > ul
+    margin 0
+    padding 0
+    display table-row
+    & > li
+      list-style none1
+      cursor pointer
+      text-align center
+      height 50px
+      display table-cell
+      &:first-child
+        border-left none
+      & > a
+        display block
+        text-decoration none
+        color black
+        line-height 50px
+      &.active > a
+        color #00f
+  &.toprow > ul > li
+    background #eee
+    &.active
+      background #fff
+  &.botrow
+    border-bottom 3px solid #eee
+  &.botrow > ul > li
+    background #fff

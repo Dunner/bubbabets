@@ -15,8 +15,9 @@ angular.module('lightApp')
     $scope.betservice = BetService;
 
     function loadBets() {
-      BetService.getBets(true, function(data){
+      BetService.getGames(true, function(data){
         data.$promise.then(function() {
+          BetService.forceBets();
         });
       });
     }

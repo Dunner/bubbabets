@@ -11,17 +11,18 @@ angular.module('lightApp.BetService', [])
   .factory('BetService', function($resource, socket, $rootScope) {
 
   	var factory     = [];
-  	var bets        = [];
-    var bet         = {};
-    var picked      = false;
+  	var gamedata    = [];
+    var bets        = [];
 
 
     socket.on('betStatus', function (status) {
-
       //Bets closed
-      factory.getBets(true, function(data){
+      factory.getGames(true, function(data){
         data.$promise.then(function() {
           factory.currentGame().status = status;
+          if (status === 1) {
+            bets = factory.currentGame().bets;
+          }
         });
       });
 
@@ -32,48 +33,52 @@ angular.module('lightApp.BetService', [])
     });
 
     socket.on('coinUpdate', function (coins) {
-      console.log(coins);
       $rootScope.currentUser.public.coins = coins;
     });
 
     factory.queryDB = function() {
-      return $resource('api/bets').query({}, function(data){
-        bet = data;
-      });
+      return $resource('api/bets').query();
     };
 
-    factory.getSingle = function(id) {
-      return $resource('api/bet/:id', { id: id }).get({}, function(data){
-        bet = data;
-        return bet;
-      });
-    };
+    // factory.getSingle = function(id) {
+    //   return $resource('api/bet/:id', { id: id }).get({}, function(data){
+    //   });
+    // };
 
     factory.setBetStatus = function(status, data) {
       return $resource('api/bet/status/:status', { status: status }).save(data);
     };
 
 
-  	factory.getBets = function(refresh, callback) {
+  	factory.getGames = function(refresh, callback) {
       var cb = callback || angular.noop;
-      if (!picked || refresh) {
-        bets = factory.queryDB();
-        picked = true;
-        return cb(bets);
+      if (refresh) {
+        gamedata = factory.queryDB();
       }
-      return cb(bets);
+      return cb(gamedata);
   	};
 
+    factory.forceBets = function(){
+      bets = factory.currentGame().bets;
+    };
+
     factory.currentGame = function() {
-      if (bets[0] !== undefined) {
-        var g = bets[0].games.length-1;
-        var game = bets[0].games[g];
+      if (gamedata[0] !== undefined) {
+        var g = gamedata[0].games.length-1;
+        var game = gamedata[0].games[g];
         return game;
       }
     };
 
+    factory.currentBets = function() {
+      if (bets !== undefined) {
+        return bets;
+      }
+    };
+
+
     factory.pushBet = function(bet) {
-      factory.currentGame().bets.push(bet);
+      bets.push(bet);
     };
 
     factory.placeBet = function(bet) {
