@@ -8,9 +8,25 @@ var mongoose = require('mongoose'),
 
 // List of bets
 exports.query = function(req, res) {
-  //Return conversation
+  //Return bets
   Bet.find().sort('-createdAt').limit(10).exec(function(err, bets) {
     if (err) {console.log(err); return res.json(500, err);}
+    
+    //No bets, create one
+    if (bets.length < 1) {
+      var bet = new Bet({
+        'identifier': 1,
+      });
+      bet.games.push({
+        gameid: Date.now(),
+        status: 3,
+      });
+      bet.save(function(err) {
+        if (err) return res.json(500, err);
+        socketIO.sockets.emit('betStatus', 1);
+      });
+    }
+    
     res.json(bets);
       
   });
@@ -130,11 +146,11 @@ exports.setstatus = function(req, res) {
       });
     } else if(status == 3) {
 
-    //Stopped betting
+      //Stopped betting
       var g = bet.games.length-1;
       var game = bet.games[g];
       bet.games[g].status = 3;
-      bet.games[g].winner = Math.round(Math.random()); //winner;
+      bet.games[g].winner = winner; //Math.round(Math.random());
 
 
       bet.save(function(err) {
