@@ -1,5 +1,37 @@
-  
 
+.tabs
+  width 100%
+  display table
+  height 50px
+  table-layout fixed
+  background #252525
+  & > ul
+    margin 0
+    padding 0
+    display table-row
+    & > li
+      list-style none
+      cursor pointer
+      color #fff
+      text-align center
+      height 50px
+      line-height 50px
+      display table-cell
+      border-right 1px solid #333
+      border-bottom 1px solid #333
+      &.active
+        background #333
+        border-bottom 0px
+      &:last-child
+        border-right 0px
+
+    
+.sidefeed
+  height calc( 100% - 50px )
+  bottom 0
+  position absolute
+  left 0
+  right 0
 .bet
   width 100%
   padding 2px 8px

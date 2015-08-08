@@ -13,6 +13,11 @@ angular.module('lightApp')
     $scope.test = undefined;
     $element.test = undefined;
     $scope.betservice = BetService;
+    $scope.activeFeed = '3';
+    
+    $scope.changeFeed = function (feed) {
+      $scope.activeFeed = feed;
+    };
 
     function loadBets() {
       BetService.getGames(true, function(data){
