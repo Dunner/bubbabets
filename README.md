@@ -4,9 +4,13 @@ bubba bets moval project
 
 
 skapa mappen C:/projects
+
 skapa mappen C:/projects/mongo
+
 skapa mappen C:/projects/mongo/data
+
 skapa filen C:/projects/mongo/startdb.bat
+
 redigera filen startdb.bat och lägg nedanstående två rader inuti:
 	"bin\mongod.exe" --dbpath "C:\projects\mongo\data"
 	pause
@@ -20,7 +24,9 @@ GUIDE
 
 ladda ner nodejs
 när det är klart, öppna en kommandotolk och kolla så det fungerar (testa igenom att skriva node --version)
+
 kör 'npm install bower -g'
+
 kör 'npm install grunt-cli -g'
 
 
@@ -28,8 +34,11 @@ kör 'npm install grunt-cli -g'
 
 
 ta dig in i projects mappen via kommandotolken 'cd C:/projects'
+
 skriv 'git clone https://github.com/Dunner/bubbabets.git'
+
 detta kommer att placera projektet i
+
 C:/projects/bubbabets
 
 i den mappen finns två mappar, client och server.
@@ -39,8 +48,11 @@ cd C:/projects/bubbabets/server och skriv 'npm install'
 cd C:/projects/bubbabets/client och skriv 'npm install' samt 'bower install'
 
 nu ska hela setupen vara klar, för att köra igång hela projektet krävs 3 kommandotolkar
+
 en för mongodb: cd C:/projects/mongo && startdb.bat
+
 en för webbservern: cd C:/projects/bubbabets/server && node server
+
 en för grunt frontendutveckling: cd C:/projects/bubbabets/client && grunt serve
 
 nu är det bara att koda på
