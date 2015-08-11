@@ -19,31 +19,6 @@ angular.module('lightApp')
       }
     };
 
-    $scope.placeBet = function(){
-      if ($scope.bettingForm.$valid) {
-      	BetService.placeBet({
-      		userid: $rootScope.currentUser._id,
-      		choice: $scope.betform.choice,
-      		amount: $scope.betform.amount
-      	});
-        BetService.findMyBet();
-      }
-    };
-
-
-    //ADMINSTUFF
-    $scope.startBetting = function(){
-      BetService.setBetStatus(1, $scope.admin.betinfo);
-    };
-
-    $scope.stopBetting = function(){
-      BetService.setBetStatus(2);
-    };
-
-    $scope.selectWinner = function(){
-      BetService.setBetStatus(3, {winner: $scope.winnerform.choice});
-    };
-
     $scope.timer = 'loading timer...';
     $scope.tickInterval = 1000;
 

@@ -8,7 +8,8 @@ var middleware = require('./middleware'),
     session = require('./controllers/session'),
     bulletin = require('./controllers/bulletin'),
     conversation = require('./controllers/conversation'),
-    bet = require('./controllers/bet');
+    bet = require('./controllers/bet'),
+    team = require('./controllers/team');
 
 module.exports = function(app) {
   // Server API Routes
@@ -37,6 +38,14 @@ module.exports = function(app) {
   app.put('/api/bet/:id', bet.update);
   app.delete('/api/bet/:id', bet.remove);
   app.post('/api/bet/status/:status', bet.setstatus);
+  // -------
+  // Teams
+  // -------
+  app.get('/api/teams', team.query);
+  app.post('/api/teams/create', team.create);
+  app.get('/api/teams/:id', team.show);
+  app.put('/api/teams/:id', team.update);
+  app.delete('/api/teams/:id', team.remove);
   // -------
   // Bulletin
   // -------

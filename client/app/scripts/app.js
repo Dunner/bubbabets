@@ -15,6 +15,7 @@ angular
     'lightApp.TopicService',
     'lightApp.MessageService',
     'lightApp.BetService',
+    'lightApp.TeamService',
     'ui.router',
     'ngAnimate',
     'ngCookies',
@@ -124,6 +125,11 @@ angular
         url: '/topic/{slug}',
         templateUrl: 'views/topic.html',
         controller: 'TopicCtrl'
+      })
+      .state('social.admin', {
+        url: '/admin',
+        templateUrl: 'views/adminpanel.html',
+        controller: 'AdminCtrl'
       });
 
     $urlRouterProvider.otherwise('/');

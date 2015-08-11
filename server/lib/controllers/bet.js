@@ -4,6 +4,7 @@ var mongoose = require('mongoose'),
     async = require('async'),
     User = mongoose.model('User'),
     Bet = mongoose.model('Bet'),
+    Team = mongoose.model('Team'),
     socketIO = global.socketIO;
 
 // List of bets
@@ -23,7 +24,7 @@ exports.query = function(req, res) {
       });
       bet.save(function(err) {
         if (err) return res.json(500, err);
-        socketIO.sockets.emit('betStatus', 1);
+        socketIO.sockets.emit('betStatus', 3);
       });
     }
     
@@ -47,7 +48,6 @@ exports.create = function(req, res) {
     }, function (err, user) {
       if (err) return res.json(500, err);
       if (user) {
-
         var newbet = {
           userid: req.body.userid,
           username: user.public.name,
@@ -55,13 +55,15 @@ exports.create = function(req, res) {
           choice: req.body.choice,
           amount: req.body.amount
         };
+        console.log(newbet);
         bet.games[g].bets.push(newbet);
         //increment bet on team
 
         bet.games[g].team[newbet.choice].coins += parseInt(newbet.amount);
-
+        bet.markModified('games');
         bet.save(function(err) {
           if (err) return res.json(500, err);
+          console.log(bet.games[g].team);
           socketIO.sockets.emit('newBet', newbet);
           res.json(bet);
         });
@@ -84,58 +86,67 @@ exports.update = function(req, res) {
 
 exports.setstatus = function(req, res) {
   var status = req.params.status;
-  var teamA = req.body.teamA;
-  var teamB = req.body.teamB;
   var timer = req.body.timer;
   var winner = req.body.winner;
 
-  Bet.findOne({'identifier': 1}, function (err, bet) {
 
-    if (status == 1) {
-      //create new game
+  if (status == 1) {
 
-      if (bet === null) {
-        var bet = new Bet({
-          'identifier': 1,
-        });
-      }
 
-      var game = bet.games.push({
-        gameid: Date.now(),
-        status: 1,
-        timer: timer,
-        team: [
-        {
-          name: teamA,
-          coins: 0,
-        },{
-          name: teamB,
-          coins: 0,
-        }]
-      })
-
-      bet.save(function(err) {
-        if (err) return res.json(500, err);
-        socketIO.sockets.emit('betStatus', 1);
+    if (bet === null) {
+      var bet = new Bet({
+        'identifier': 1,
       });
+    }
+    //create new game
+    if (req.body.team !== 'undefined') {
+      Bet.findOne({'identifier': 1}, function (err, bet) {
 
-      //STOP BETTING AFTER $timer MILISECONDS
-      setTimeout(function(){
-        var g = bet.games.length-1;
-        var game = bet.games[g];
-        bet.games[g].status = 2;
+        var teamA = req.body.team[0];
+        var teamB = req.body.team[1];
+        teamA.coins = 0;
+        teamB.coins = 0;
+        //prepare gameinfo
+        var game = {
+          gameid: Date.now(),
+          status: 1,
+          timer: timer,
+          team: []
+        };
+
+        game.team.push(teamA);
+        game.team.push(teamB);
+        bet.games.push(game);
+
         bet.save(function(err) {
           if (err) return res.json(500, err);
-          socketIO.sockets.emit('betStatus', 2);
-          res.json(bet);
+          socketIO.sockets.emit('betStatus', 1);
+        });
+      });
+      //STOP BETTING AFTER $timer MILISECONDS
+      setTimeout(function(){
+        Bet.findOne({'identifier': 1}, function (err, bet) {
+          var g = bet.games.length-1;
+          var game = bet.games[g];
+          if (bet.games[g].status !== 3) {
+            bet.games[g].status = 2;
+            bet.save(function(err) {
+              if (err) return res.json(500, err);
+              socketIO.sockets.emit('betStatus', 2);
+              res.json(bet);
+            });
+          };
         });
       }, timer*1000);
-      
 
-    } else if(status == 2) {
+    };
 
-      //Stop betting without timer
+    
 
+  } else if(status == 2) {
+
+    //Stop betting without timer
+    Bet.findOne({'identifier': 1}, function (err, bet) {
       var g = bet.games.length-1;
       var game = bet.games[g];
       bet.games[g].status = 2;
@@ -144,7 +155,10 @@ exports.setstatus = function(req, res) {
         socketIO.sockets.emit('betStatus', 2);
         res.json(bet);
       });
-    } else if(status == 3) {
+    });
+
+  } else if(status == 3) {
+    Bet.findOne({'identifier': 1}, function (err, bet) {
 
       //Stopped betting
       var g = bet.games.length-1;
@@ -156,6 +170,42 @@ exports.setstatus = function(req, res) {
       bet.save(function(err) {
         if (err) return res.json(500, err);
       });
+
+
+      // INCREMENT/DECEREMENT winning/loosing team record
+      if (bet.games[g].winner == 1) {
+        var winnerteam = bet.games[g].team[1]._id;
+        console.log(winnerteam);
+        Team.findById(winnerteam, function (err, team){
+          if(team) {
+            team.wins +=1;
+            team.save();
+          }
+        });
+        var looserteam = bet.games[g].team[0]._id;
+        Team.findById(looserteam, function (err, team){
+          if(team) {
+            team.losses +=1;
+            team.save();
+          }
+        });
+      } else {
+        var winnerteam = bet.games[g].team[0]._id;
+        Team.findById(winnerteam, function (err, team){
+          if(team) {
+            team.wins +=1;
+            team.save();
+          }
+        });
+        var looserteam = bet.games[g].team[1]._id;
+        Team.findById(looserteam, function (err, team){
+          if(team) {
+            team.losses +=1;
+            team.save();
+          }
+        });
+      }
+
       //edit money for winners/loosers
       async.each(bet.games[g].bets, 
         function(elem, callback) {
@@ -181,6 +231,7 @@ exports.setstatus = function(req, res) {
                 }
                 
                 user.save(function(err) {
+                  console.log('this ran');
                   global.userlist[elem.userid].emit('coinUpdate', user.public.coins);
                 });
               } else {
@@ -204,9 +255,8 @@ exports.setstatus = function(req, res) {
           res.json(bet);
         }
       );
-    }
-
-  });
+    });
+  };
 };
 
 // Remove a bet

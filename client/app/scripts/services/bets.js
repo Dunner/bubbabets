@@ -13,6 +13,7 @@ angular.module('lightApp.BetService', [])
   	var factory     = [];
   	var gamedata    = [];
     var bets        = [];
+    var newbets     = 0;
 
 
     socket.on('betStatus', function (status) {
@@ -23,12 +24,17 @@ angular.module('lightApp.BetService', [])
           if (status === 1) {
             bets = factory.currentGame().bets;
           }
+          if (status === 3) {
+            newbets = 0;
+            factory.currentGame().team[factory.currentGame().winner].wins +=1;
+          }
         });
       });
 
     });
 
     socket.on('newBet', function (bet) {
+      newbets ++;
       factory.pushBet(bet);
     });
 
@@ -127,6 +133,10 @@ angular.module('lightApp.BetService', [])
         }
         return 'sup';
       }
+    };
+
+    factory.getNewBets = function() {
+      return newbets;
     };
 
     factory.getTimer = function() {

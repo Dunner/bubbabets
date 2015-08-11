@@ -96,6 +96,7 @@ p, b, h1, h2, h3, h4, h5, h6, span
 
 [ui-view].ng-enter, [ui-view].ng-leave
     transition all .5s ease-in-out
+    position absolute
 
 [ui-view].ng-enter
   overflow hidden
@@ -110,7 +111,28 @@ p, b, h1, h2, h3, h4, h5, h6, span
 [ui-view].ng-leave-active
   opacity 0
 
+//Sidefeed animation
+.animate-switch.ng-animate
+  transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) .1s
+  position absolute
+  right 0
 
+.animate-switch.ng-leave.ng-leave-active
+  right -100% !important
+  z-index 10
+  & .dnr-flow-content-scroll
+    overflow hidden !important
+    
+.animate-switch.ng-enter
+  right: 100% !important
+  z-index 11
+
+.animate-switch.ng-leave,
+.animate-switch.ng-enter.ng-enter-active
+  right 0px !important
+  z-index 11
+  & .dnr-flow-content-scroll
+    overflow hidden !important
 
 //bets
 .red.ng-animate 

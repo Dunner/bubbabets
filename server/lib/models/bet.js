@@ -13,16 +13,7 @@ var BetSchema = new Schema({
 		  status : Number,
 		  winner : Number,
 		  timer  : Number,
-		  team   : [
-		  	{
-		  		name  : String,
-		  		coins : Number
-		  	},
-		  	{
-		  		name  : String,
-		  		coins : Number
-		  	}
-		  ],
+		  team   : [Schema.Types.Mixed],
 		  bets : [
 		    {
 		      userid: String,

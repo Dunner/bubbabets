@@ -7,13 +7,17 @@
  * # betsFeed
  */
 angular.module('lightApp')
-.directive('betsFeed', function(BetService) {
+.directive('betsFeed', function(BetService, $rootScope) {
 
   function link($scope, $element) {
     $scope.test = undefined;
     $element.test = undefined;
     $scope.betservice = BetService;
-    $scope.activeFeed = '3';
+    $scope.activeFeed = '1';
+    $scope.betform = {
+      choice: -1,
+      amount: 0
+    };
     
     $scope.changeFeed = function (feed) {
       $scope.activeFeed = feed;
@@ -28,6 +32,18 @@ angular.module('lightApp')
     }
     loadBets();
 
+    $scope.placeBet = function(form){
+      if (form.$valid) {
+        if ($scope.betform.choice !== -1) {
+          BetService.placeBet({
+            userid: $rootScope.currentUser._id,
+            choice: $scope.betform.choice,
+            amount: $scope.betform.amount
+          });
+          BetService.findMyBet();
+        }
+      }
+    };
 
   }
 

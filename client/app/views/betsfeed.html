@@ -1,56 +1,93 @@
 <div class="tabs">
-	<ul>
-		<li ng-click="changeFeed('1')" ng-class="{'active':activeFeed === '1'}">1</li>
-		<li ng-click="changeFeed('2')" ng-class="{'active':activeFeed === '2'}">2</li>
-		<li ng-click="changeFeed('3')" ng-class="{'active':activeFeed === '3'}">3</li>
-	</ul>
+  <ul>
+    <li ng-click="changeFeed('1')" ng-class="{'active':activeFeed === '1'}">1</li>
+    <li ng-click="changeFeed('2')" ng-class="{'active':activeFeed === '2'}">2</li>
+    <li ng-click="changeFeed('3')" ng-class="{'active':activeFeed === '3'}">3 <span class="bubble" ng-show="betservice.getNewBets() === 1">{{betservice.getNewBets()}}</span></li>
+  </ul>
 </div>
+
 <div class="sidefeed" ng-switch on="activeFeed">
-		
-	<div class="bets" ng-switch-when="1">
-		<div class="left-col-wrap">
+    
+  <div class="cards animate-switch" ng-switch-when="1">
 
-            <div class="left-col">
-              <div class="left-cont">
-                  <div class="bet-options">
-                    <div class="bet-option">
-                      <div class="bet-top">
-                        <div class="bet-left">
-                          <img src="http://i.imgur.com/7YZz6Bx.jpg" class="bet-image"></img>
-                        </div>
-                        <div class="bet-right">
-                          
-                          
+    <div class="card cursor" 
+         ng-repeat="team in betservice.currentGame().team"
+         ng-click="betform.choice = $index"
+         ng-class="{'selected': (betform.choice === $index && betservice.currentGame().status != 3)}">
+      <div class="bet-upper">
+        <div class="bet-left">
+          <img ng-src="{{team.image}}" class="bet-image"></img>
+        </div>
+        <div class="bet-right">
+          <div class="bet-name"><p class="bet-text double-border">{{team.name}}</p></div>
+        </div>
+      </div>
+      <div class="bet-lower">
+        <div class="bet-desc-wrap">
+          <div class="bet-desc">{{team.description}}</div>
+        </div>
+        <div class="bet-bot">
+          <div class="bet-ratio"><p class="bet-text">W/L: {{team.wins}}:{{team.losses}}</p></div>
+          <div class="bet-odds"><p class="bet-text f-green">Odds: 1.01</p></div>
+        </div>
+      </div>
+    </div>
 
-                        </div>
-                      </div>
-                      <div class="bet-bot">
-                        
-                        
+    <div class="betting-amount">
+      <form name="bettingForm" ng-submit="placeBet(bettingForm)" ng-show="betservice.currentGame().status == 1 && betservice.findMyBet() == false">
+        <small class="error" ng-show="bettingForm.team.$error.required">
+          You need to choose a team
+        </small>
+        <div>You have <small>{{$root.currentUser.public.coins}}</small></div>
+        Amount: <input ng-model="betform.amount" name="number" betting-amount required ng-minlength=2>
+        <small class="error" ng-show="bettingForm.number.$error.minlength">
+          You need to bet atleast 10 coins
+        </small>
+        <br>
+        <button class="button" type="submit">Place bet</button>
+      </form>
 
-                      </div>
-                    </div>
-                  </div>
-              </div>
-            </div>
+      <div ng-show="betservice.currentGame().status == 2">
+        <h3>Bets are closed</h3>
+      </div>
+
+      <div ng-show="betservice.findMyBet() !== false">
+        you placed {{betservice.findMyBet().amount}}$ on {{betservice.currentGame().team[betservice.findMyBet().choice].name}}
+      </div>
+
+
+      <div ng-show="betservice.currentGame().status == 3">
+        <h1 style="color: blue">{{betservice.currentGame().team[betservice.currentGame().winner].name}} wins!</h1>
+
+        <!-- you win -->
+        <div ng-show="betservice.currentGame().winner == betservice.findMyBet().choice">
+          You win
+        </div>
+
+        <!-- you loose -->
+        <div ng-show="betservice.currentGame().winner != betservice.findMyBet().choice">
+          You loose
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="bets" ng-switch-when="2">
+    tab 2
+  </div>
+  
+  <div class="bets" ng-switch-when="3">
+    <div ng-repeat="bet in betservice.currentBets()" class="animate-bet bet" ng-class="(bet.choice==0) ? 'red' : 'blue'">
+      <div class="inside">
+        <a ui-sref="social.user({'id': bet.userid})">{{bet.username}}</a> 
+        <p>{{bet.amount}}$ on {{betservice.currentGame().team[bet.choice].name}}</p>
+          <div class="icon">
+            <svg width="100%" height-"100%" dnr-avatar paperdoll="bet.userpaperdoll" viewBox="90 150 550 1052"></svg>
+            {{bet.userpaperdoll}}
           </div>
-	</div>
-	
-	<div class="bets" ng-switch-when="2">
-		tab 2
-	</div>
-	
-	<div class="bets" ng-switch-when="3">
-		<div ng-repeat="bet in betservice.currentBets()" class="animate-bet bet" ng-class="(bet.choice==0) ? 'red' : 'blue'">
-			<div class="inside">
-				<a ui-sref="social.user({'id': bet.userid})">{{bet.username}}</a> 
-				<p>{{bet.amount}}$ on {{betservice.currentGame().team[bet.choice].name}}</p>
-			    <div class="icon">
-			      <svg width="100%" height-"100%" dnr-avatar paperdoll="bet.userpaperdoll" viewBox="90 150 550 1052"></svg>
-			      {{bet.userpaperdoll}}
-			    </div>
-			</div>
-		</div>
-	</div>
+      </div>
+    </div>
+  </div>
 
 </div>
