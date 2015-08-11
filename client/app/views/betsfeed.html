@@ -28,7 +28,7 @@
         </div>
         <div class="bet-bot">
           <div class="bet-ratio"><p class="bet-text">W/L: {{team.wins}}:{{team.losses}}</p></div>
-          <div class="bet-odds"><p class="bet-text f-green">Odds: 1.01</p></div>
+          <div class="bet-odds"><p class="bet-text f-green">{{team.coins / betservice.currentGame().total}}</p></div>
         </div>
       </div>
     </div>

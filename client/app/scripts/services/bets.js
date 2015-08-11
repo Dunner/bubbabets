@@ -85,6 +85,17 @@ angular.module('lightApp.BetService', [])
 
     factory.pushBet = function(bet) {
       bets.push(bet);
+      //calculate bets odds
+
+
+      //add bet amount to total amount
+      if (factory.currentGame().total === undefined) {
+        console.log(factory.currentGame().total);
+        factory.currentGame().total = 0;
+      }
+      factory.currentGame().total += parseInt(bet.amount);
+      factory.currentGame().team[bet.choice].coins += parseInt(bet.amount);
+      console.log(factory.currentGame());
     };
 
     factory.placeBet = function(bet) {
