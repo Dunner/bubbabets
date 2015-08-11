@@ -15,7 +15,7 @@ redigera filen startdb.bat och lägg detta inuti:
 	"bin\mongod.exe" --dbpath "C:\projects\mongo\data"
 	pause
 
-starta filen
+spara filen
 
 ladda ner mongodb och välj att installera i C:/projects/mongo (när det är installerat bör bin mappen ligga C:\projects\mongo\bin)
 
