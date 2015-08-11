@@ -15,10 +15,12 @@ redigera filen startdb.bat och lägg detta inuti:
 	"bin\mongod.exe" --dbpath "C:\projects\mongo\data"
 	pause
 
-ladda ner mongodb och välj att installera i C:/projects/mongo (när det är installerat bör bin mappen ligga C:\projects\mongo\bin)
-starta filen, nu borde databasen vara igång
+starta filen
 
-spara C:/projects/mongo/startdb.bat filen, nu borde databasen vara igång.
+ladda ner mongodb och välj att installera i C:/projects/mongo (när det är installerat bör bin mappen ligga C:\projects\mongo\bin)
+
+
+starta C:/projects/mongo/startdb.bat filen, nu borde databasen vara igång.
 
 GUIDE
 
