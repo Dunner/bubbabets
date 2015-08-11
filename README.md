@@ -11,7 +11,7 @@ skapa mappen C:/projects/mongo/data
 
 skapa filen C:/projects/mongo/startdb.bat
 
-redigera filen startdb.bat och lägg nedanstående två rader inuti:
+redigera filen startdb.bat och lägg detta inuti:
 	"bin\mongod.exe" --dbpath "C:\projects\mongo\data"
 	pause
 
