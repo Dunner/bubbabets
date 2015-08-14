@@ -15,8 +15,7 @@ angular.module('lightApp')
     $scope.betservice = BetService;
     $scope.activeFeed = '1';
     $scope.betform = {
-      choice: -1,
-      amount: 0
+      choice: -1
     };
     
     $scope.changeFeed = function (feed) {
