@@ -9,7 +9,7 @@
       {{user.name}}
       <button ng-click="addFriend()" ng-show="!isBuddy(userId)">Add friend</button>
       <button ng-click="MessageService.openChat(userId, user.name)">Message</button>
-      Coins: {{user.coins}}
+      Coins: {{user.coins.toFixed(0)}}
     </div>
   </li>
   <li>

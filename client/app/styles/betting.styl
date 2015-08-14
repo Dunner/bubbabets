@@ -101,6 +101,13 @@
   border-top 1px solid rgba(255,255,255,0.1)
   border-bottom 1px solid rgba(255,255,255,0.1)
   line-height 200%
+  
+.icon
+  position absolute
+  padding 18px 5px 9px 8px
+  font-size 0.8rem !important
+  color #a9a9a9
+  z-index 8
 
 .cards
   width 100%
@@ -158,7 +165,7 @@
           width 50%
           float left
           border-left 1px solid rgba(255,255,255,0.1)
-  & .betting-amount
+  & .betting-amount-wrap
     padding-top 5px
     border-top 1px solid #222
     color #fefefe
@@ -166,4 +173,13 @@
     left 0px
     right 0px
     bottom 0px
+    & .betting-amount
+      width 100%
+      height 29px
+      padding-left 26px
+      margin 10px 0 10px 0
+      border 1px solid rgba(255,255,255,0.1)
+      background #232329
+      font-family 'FontAwesome', "Helvetica Neue", Arial, sans-serif
+      color #fff
     

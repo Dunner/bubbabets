@@ -2,8 +2,8 @@
 
 <div class="mast-container">
   <div class="mast-userarea">
-    user: {{$root.currentUser.public.name}}
-    {{$root.currentUser.public.coins}}$
+    {{$root.currentUser.public.name}}: 
+    {{$root.currentUser.public.coins.toFixed(0)}}$
     <p class="cursor" ng-click="$root.logout()">Logout</p>
     <div class="icon">
       <svg width="100%" height-"100%" dnr-avatar paperdoll="$root.currentUser.public.paperdoll" viewBox="90 150 550 1052"></svg>

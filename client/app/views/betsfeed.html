@@ -33,16 +33,17 @@
       </div>
     </div>
 
-    <div class="betting-amount">
+    <div class="betting-amount-wrap">
       <form name="bettingForm" ng-submit="placeBet(bettingForm)" ng-show="betservice.currentGame().status == 1 && betservice.findMyBet() == false">
         <small class="error" ng-show="bettingForm.team.$error.required">
           You need to choose a team
         </small>
-        <div>You have <small>{{$root.currentUser.public.coins}}</small></div>
-        Amount: <input ng-model="betform.amount" name="number" betting-amount required ng-minlength=2>
+        <i class="fa fa-money icon"></i><input class="betting-amount" ng-model="betform.amount" placeholder="Amount" name="number" betting-amount required ng-minlength=2>
+        <!--
         <small class="error" ng-show="bettingForm.number.$error.minlength">
           You need to bet atleast 10 coins
         </small>
+        -->
         <br>
         <button class="button" type="submit">Place bet</button>
       </form>
